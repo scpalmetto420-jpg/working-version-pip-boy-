@@ -1,0 +1,1168 @@
+// Fallout state lore and vaults data for Map tab
+const stateLoreData = {
+  alaska: {
+    name: 'Alaska',
+    lore: [
+      'A key front line in the Great War against China, especially the Anchorage Campaign (Operation Anchorage DLC, Fallout 3).',
+      'Presumed to be one of the most ravaged regions due to war, nuclear strikes, and nuclear winters.',
+      'Key locations: Anchorage, Chinese Front.'
+    ],
+    vaults: []
+  },
+  arizona: {
+    name: 'Arizona',
+    lore: [
+      'Largely controlled by Caesar\'s Legion after the war.',
+      'The Legion\'s rise helped decrease violence and Raider activity.',
+      'Key locations: Arizona Spillway.'
+    ],
+    vaults: []
+  },
+  california: {
+    name: 'California',
+    lore: [
+      'Cornerstone of classic Fallout lore and setting for Fallout 1 & 2.',
+      'Birthplace of the New California Republic (NCR), original Brotherhood of Steel, and The Master\'s Army.',
+      'Los Angeles (The Boneyard) was a primary nuclear target.',
+      'Key locations: NCR, Brotherhood of Steel, The Boneyard (L.A.), Shady Sands.'
+    ],
+    vaults: [] // Add vaults if desired
+  },
+  colorado: {
+    name: 'Colorado',
+    lore: [
+      'Largely controlled by Caesar\'s Legion after the war.',
+      'Legate Lanius "put Colorado to the sword".',
+      'Key locations: None specified.'
+    ],
+    vaults: []
+  },
+  connecticut: {
+    name: 'Connecticut',
+    lore: [
+      'Very little is known. References mostly come from transient characters who left shortly after the Great War.'
+    ],
+    vaults: []
+  },
+  // ...repeat for all other states, using the provided lore and vaults, or fallback below...
+};
+
+// Fallback for states with no lore
+const fallbackStateLore = {
+  name: '',
+  lore: [
+    'WARNING:',
+    "robco is not responsible for you're death don't go forward from here.",
+    'DATA:',
+    'This region has been historically isolated. Reports are anecdotal, incomplete, or corrupted. Do not rely on pre-War data.'
+  ],
+  vaults: []
+};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fallout GM/Player UI - Main Menu Only</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono|Orbitron:700" />
+  <style>
+      /* SPECIAL tab font style for all main content areas */
+      .fallout-main-content, .fallout-section-header, .fallout-list, .fallout-table {
+        font-family: 'Share Tech Mono', monospace !important;
+        color: #39ff14;
+      }
+      .fallout-main-content, .fallout-table {
+        font-size: 18px !important;
+      }
+      .fallout-section-header {
+        font-size: 16px !important;
+        font-weight: bold;
+      }
+      .fallout-list {
+        font-size: 15px !important;
+      }
+    html, body {
+      height: 100vh;
+      width: 100vw;
+      background: #050d07;
+      color: #39ff14;
+      font-family: 'Share Tech Mono', monospace;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      box-sizing: border-box;
+      overflow: hidden;
+      font-size: 11px;
+    }
+    .main-menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 10px solid #39ff14;
+      box-sizing: border-box;
+      width: 98vw;
+      height: 98vh;
+      margin: auto;
+      background: #0a1a0a;
+    }
+    .main-menu-title {
+      font-family: 'Orbitron', 'Share Tech Mono', monospace;
+      font-size: 2.8em;
+      margin-bottom: 36px;
+      text-align: center;
+      letter-spacing: 2px;
+      color: #39ff14;
+      text-shadow: 0 0 12px #39ff14, 0 0 2px #fff;
+      user-select: none;
+    }
+    .main-menu-btn-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      margin: 0;
+    }
+    .main-menu-btn {
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding: 16px 32px;
+      font-size: 1.3em;
+      background: #050d07;
+      color: #39ff14;
+      border: 2px solid #39ff14;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Share Tech Mono', monospace;
+      box-shadow: 0 0 16px #39ff14, 0 0 8px #39ff14 inset;
+      text-shadow: 0 0 8px #39ff14, 0 0 2px #fff;
+      margin: 0;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      letter-spacing: 2px;
+        text-align: center;
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .main-menu-btn:hover {
+      background: #39ff14;
+      color: #050d07;
+      box-shadow: 0 0 24px #39ff14, 0 0 8px #39ff14 inset;
+    }
+    .gmui-wrapper {
+      border: 10px solid #39ff14;
+      box-sizing: border-box;
+      width: 98vw;
+      height: 98vh;
+      margin: auto;
+      background: #0a1a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .gmui-header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 48px;
+      background: #050d07;
+      border-bottom: 2px solid #39ff14;
+      border-radius: 8px;
+      border: 2px solid #39ff14;
+      box-shadow: 0 0 8px #39ff14 inset;
+      padding: 0 16px;
+      font-family: 'Share Tech Mono', monospace;
+      color: #39ff14;
+      font-size: 1.3em;
+      letter-spacing: 1px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      width: calc(4 * 253px + 3 * 10px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gmui-tabs {
+      display: flex;
+      gap: 18px;
+      margin-left: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    .gmui-tab {
+      background: none;
+      border: none;
+      color: #39ff14;
+      font-size: 18px;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 6px 18px;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .gmui-tab.active {
+      background: #0a1e12;
+      border-bottom: 2px solid #39ff14;
+      font-weight: bold;
+    }
+    .gmui-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 253px);
+      grid-gap: 10px;
+      width: calc(4 * 253px + 3 * 10px);
+      height: 400px;
+      margin: 10px auto 0 auto;
+      background: none;
+      align-items: start;
+    }
+    .gmui-col {
+      background: #050d07;
+      border-radius: 8px;
+      border: 2px solid #39ff14;
+      box-shadow: 0 0 8px #39ff14 inset;
+      box-sizing: border-box;
+      height: 400px;
+      width: 253px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      color: #39ff14;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1em;
+      padding: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      max-height: 400px;
+      word-break: break-word;
+    }
+    .gmui-btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 8px;
+      width: 100%;
+    }
+    .gmui-player-card {
+      font-size: 0.95em;
+      word-break: break-word;
+      padding: 6px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      background: none;
+      color: #39ff14;
+      border: 2px solid #222;
+      cursor: pointer;
+      width: 100%;
+      box-sizing: border-box;
+      display: block;
+    }
+    .gmui-player-card.selected {
+      border: 2px solid #39ff14;
+      background: #0a1a0a;
+      color: #39ff14;
+    }
+    .gmui-mainmenu-btn-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      width: 100%;
+    }
+    .gmui-dice-btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+      margin-bottom: 8px;
+      width: 100%;
+      align-items: center;
+    }
+    .gm-ui {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #050d07;
+      border-bottom: 2px solid #39ff14;
+      padding: 8px 0;
+      gap: 4px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: #39ff14;
+      font-size: 18px;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      flex: 1;
+      text-align: center;
+    }
+    .tab-btn:hover {
+      background: #39ff14;
+      color: #050d07;
+    }
+    .tab-btn.active {
+      background: #0a1e12;
+      border-bottom: 2px solid #39ff14;
+      font-weight: bold;
+    }
+    .gm-panel {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+      padding: 10px;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+    .gm-col {
+      background: #050d07;
+      border-radius: 8px;
+      border: 2px solid #39ff14;
+      box-shadow: 0 0 8px #39ff14 inset;
+      box-sizing: border-box;
+      padding: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      color: #39ff14;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1em;
+      word-break: break-word;
+    }
+  </style>
+  <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <style>
+    .fallout-bar-container {
+      position: relative;
+      width: 220px;
+      height: 22px;
+      background: #222;
+      border: 2px solid #39ff14;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 8px 0;
+      box-shadow: 0 0 8px #39ff14 inset;
+    }
+    .fallout-bar-health {
+      position: absolute;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: #39ff14;
+      transition: width 0.4s;
+      z-index: 1;
+    }
+    .fallout-bar-rad {
+      position: absolute;
+      height: 100%;
+      top: 0;
+      background: #ff0033cc;
+      transition: width 0.4s, left 0.4s;
+      z-index: 2;
+    }
+    .fallout-bar-label {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      z-index: 3;
+      top: 0;
+      line-height: 22px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 13px;
+      text-shadow: 1px 1px 2px #000;
+      pointer-events: none;
+    }
+  </style>
+  <script type="text/babel">
+    // Fallout-style Health/Radiation Bar Component
+    const { useState } = React;
+
+    function MainMenu({ onSelect }) {
+      return (
+        <div className="main-menu">
+          <div className="main-menu-title">Pip-Boy</div>
+          <div className="main-menu-btn-row">
+            <button className="main-menu-btn" onClick={() => onSelect('GM')}>Overseer</button>
+            <button className="main-menu-btn" onClick={() => onSelect('PLAYER')}>Player</button>
+            <button className="main-menu-btn" onClick={() => alert('New Game coming soon!')}>New Game</button>
+            <button className="main-menu-btn" onClick={() => alert('Load coming soon!')}>Load</button>
+            <button className="main-menu-btn" onClick={() => alert('Save coming soon!')}>Save</button>
+          </div>
+        </div>
+      );
+    }
+
+    function GMUI({ onMainMenu }) {
+      const [activeTab, setActiveTab] = React.useState('Stats');
+      const [invSubtab, setInvSubtab] = React.useState('Weapons');
+      // Demo state for FalloutHealthRadBar (remove or connect to player data as needed)
+      const [demoHealth, setDemoHealth] = React.useState(70);
+      const [demoRad, setDemoRad] = React.useState(20);
+      const demoMaxHealth = 100;
+      // Player database: generic, well-formatted
+      const [players, setPlayers] = React.useState([
+        {
+          name: 'Sniper',
+          hp: 80, maxHp: 85, ap: 100, maxAp: 100, rad: 15,
+          level: 3, xp: 250,
+          role: 'Sniper',
+          skills: {
+            Guns: 58, Melee: 42, Science: 40, Repair: 44, Energy: 49, Sneak: 48, Medicine: 42, Lockpick: 48
+          },
+          perks: ['Gunslinger Rank 2', 'Sneak Rank 3'],
+          traits: ['Eagle Eyes: <span style="color:#ffe066">+25% Accuracy</span>, <span style="color:#ff4444">-15% Perception</span>'],
+          equipment: ['Scoped Rifle', 'Leather Armor', 'Combat Knife']
+        },
+        {
+          name: 'Doctor',
+          hp: 95, maxHp: 95, ap: 85, maxAp: 85, rad: 5,
+          level: 2, xp: 180,
+          role: 'Medic',
+          skills: {
+            Guns: 52, Melee: 38, Science: 35, Repair: 40, Energy: 41, Sneak: 44, Medicine: 49, Lockpick: 42
+          },
+          perks: ['Field Medic', 'Quick Recovery'],
+          traits: ['Resilient: <span style="color:#ffe066">+10% HP</span>', 'Cautious: <span style="color:#ff4444">-10% Initiative</span>'],
+          equipment: ['9mm Pistol', 'Lab Coat', 'Medkit']
+        },
+        {
+          name: 'Trader',
+          hp: 70, maxHp: 90, ap: 90, maxAp: 95, rad: 25,
+          level: 4, xp: 320,
+          role: 'Trader',
+          skills: {
+            Guns: 60, Melee: 45, Science: 50, Repair: 48, Energy: 55, Sneak: 50, Medicine: 47, Lockpick: 51
+          },
+          perks: ['Barter Master', 'Quick Hands'],
+          traits: ['Shrewd: <span style="color:#ffe066">+15% Barter</span>', 'Greedy: <span style="color:#ff4444">-5% Charisma</span>'],
+          equipment: ['Revolver', 'Business Suit', 'Stash Bag']
+        },
+        {
+          name: 'Scout',
+          hp: 85, maxHp: 95, ap: 95, maxAp: 95, rad: 10,
+          level: 3, xp: 210,
+          role: 'Scout',
+          skills: {
+            Guns: 54, Melee: 40, Science: 42, Repair: 46, Energy: 48, Sneak: 55, Medicine: 44, Lockpick: 45
+          },
+          perks: ['Fast Step', 'Silent Movement'],
+          traits: ['Stealthy: <span style="color:#ffe066">+20% Sneak</span>', 'Fragile: <span style="color:#ff4444">-10% HP</span>'],
+          equipment: ['SMG', 'Light Armor', 'Binoculars']
+        },
+        {
+          name: 'Mechanic',
+          hp: 90, maxHp: 100, ap: 80, maxAp: 90, rad: 20,
+          level: 2, xp: 160,
+          role: 'Mechanic',
+          skills: {
+            Guns: 45, Melee: 38, Science: 55, Repair: 60, Energy: 40, Sneak: 35, Medicine: 39, Lockpick: 50
+          },
+          perks: ['Tinkerer', 'Quick Fix'],
+          traits: ['Handy: <span style="color:#ffe066">+20% Repair</span>', 'Absent-minded: <span style="color:#ff4444">-10% Perception</span>'],
+          equipment: ['Wrench', 'Tool Belt', 'Work Overalls']
+        },
+        {
+          name: 'Bodyguard',
+          hp: 120, maxHp: 120, ap: 70, maxAp: 80, rad: 8,
+          level: 5, xp: 400,
+          role: 'Bodyguard',
+          skills: {
+            Guns: 65, Melee: 70, Science: 30, Repair: 35, Energy: 38, Sneak: 30, Medicine: 40, Lockpick: 28
+          },
+          perks: ['Tough Skin', 'Heavy Hitter'],
+          traits: ['Bulwark: <span style="color:#ffe066">+30% HP</span>', 'Slow: <span style="color:#ff4444">-10% Speed</span>'],
+          equipment: ['Shotgun', 'Heavy Armor', 'Shield']
+        },
+        {
+          name: 'Scavenger',
+          hp: 75, maxHp: 80, ap: 110, maxAp: 110, rad: 30,
+          level: 3, xp: 220,
+          role: 'Scavenger',
+          skills: {
+            Guns: 50, Melee: 40, Science: 45, Repair: 55, Energy: 42, Sneak: 60, Medicine: 41, Lockpick: 60
+          },
+          perks: ['Resourceful', 'Quick Hands'],
+          traits: ['Lucky: <span style="color:#ffe066">+15% Loot</span>', 'Greedy: <span style="color:#ff4444">-5% Charisma</span>'],
+          equipment: ['Pipe Pistol', 'Patchwork Armor', 'Backpack']
+        },
+        {
+          name: 'Outcast',
+          hp: 65, maxHp: 80, ap: 120, maxAp: 120, rad: 35,
+          level: 4, xp: 340,
+          role: 'Outcast',
+          skills: {
+            Guns: 62, Melee: 50, Science: 38, Repair: 42, Energy: 60, Sneak: 52, Medicine: 40, Lockpick: 55
+          },
+          perks: ['Lone Wolf', 'Survivor'],
+          traits: ['Resistant: <span style="color:#ffe066">+10% RAD</span>', 'Unfriendly: <span style="color:#ff4444">-10% Charisma</span>'],
+          equipment: ['Laser Rifle', 'Trench Coat', 'Gas Mask']
+        },
+        {
+          name: 'Raider',
+          hp: 100, maxHp: 100, ap: 80, maxAp: 90, rad: 20,
+          level: 3, xp: 210,
+          role: 'Raider',
+          skills: {
+            Guns: 70, Melee: 65, Science: 30, Repair: 35, Energy: 35, Sneak: 40, Medicine: 38, Lockpick: 40
+          },
+          perks: ['Berserker', 'Intimidator'],
+          traits: ['Aggressive: <span style="color:#ffe066">+20% Melee</span>', 'Reckless: <span style="color:#ff4444">-10% Defense</span>'],
+          equipment: ['Spiked Bat', 'Raider Armor', 'Grenades']
+        },
+        {
+          name: 'Vault Dweller',
+          hp: 90, maxHp: 100, ap: 100, maxAp: 100, rad: 10,
+          level: 2, xp: 150,
+          role: 'Vault Dweller',
+          skills: {
+            Guns: 55, Melee: 40, Science: 60, Repair: 50, Energy: 45, Sneak: 42, Medicine: 50, Lockpick: 48
+          },
+          perks: ['Educated', 'Resourceful'],
+          traits: ['Smart: <span style="color:#ffe066">+15% Science</span>', 'Naive: <span style="color:#ff4444">-10% Barter</span>'],
+          equipment: ['10mm Pistol', 'Vault Suit', 'Pip-Boy']
+        },
+        {
+          name: 'Hunter',
+          hp: 85, maxHp: 90, ap: 95, maxAp: 95, rad: 18,
+          level: 3, xp: 230,
+          role: 'Hunter',
+          skills: {
+            Guns: 60, Melee: 55, Science: 35, Repair: 40, Energy: 38, Sneak: 50, Medicine: 45, Lockpick: 44
+          },
+          perks: ['Tracker', 'Animal Friend'],
+          traits: ['Keen Eye: <span style="color:#ffe066">+10% Accuracy</span>', 'Solitary: <span style="color:#ff4444">-5% Charisma</span>'],
+          equipment: ['Hunting Rifle', 'Camo Armor', 'Trap Kit']
+        },
+        {
+          name: 'Engineer',
+          hp: 80, maxHp: 90, ap: 90, maxAp: 100, rad: 12,
+          level: 4, xp: 310,
+          role: 'Engineer',
+          skills: {
+            Guns: 48, Melee: 35, Science: 65, Repair: 70, Energy: 50, Sneak: 38, Medicine: 42, Lockpick: 55
+          },
+          perks: ['Inventor', 'Fixer'],
+          traits: ['Creative: <span style="color:#ffe066">+20% Repair</span>', 'Distracted: <span style="color:#ff4444">-10% Initiative</span>'],
+          equipment: ['Plasma Pistol', 'Engineer Armor', 'Toolkit']
+        },
+        {
+          name: 'Mutant',
+          hp: 150, maxHp: 150, ap: 60, maxAp: 70, rad: 50,
+          level: 6, xp: 500,
+          role: 'Mutant',
+          skills: {
+            Guns: 40, Melee: 80, Science: 20, Repair: 30, Energy: 25, Sneak: 20, Medicine: 35, Lockpick: 15
+          },
+          perks: ['Regeneration', 'Brute Force'],
+          traits: ['Tough: <span style="color:#ffe066">+40% HP</span>', 'Clumsy: <span style="color:#ff4444">-20% Sneak</span>'],
+          equipment: ['Super Sledge', 'Mutant Hide Armor', 'Rad-X']
+        }
+      ]);
+      const [selectedPlayer, setSelectedPlayer] = React.useState(0);
+      // Dice roller state
+      const [d6Count, setD6Count] = React.useState(6);
+      const [diceResults, setDiceResults] = React.useState({ d20_2: '-', d20_1: '-', d6: '-' });
+      function rollDice(sides, count) {
+        let rolls = [];
+        for (let i = 0; i < count; i++) {
+          rolls.push(Math.floor(Math.random() * sides) + 1);
+        }
+        return rolls.join(', ');
+      }
+      function handleRoll(type) {
+        if (type === '2d20') {
+          setDiceResults(r => ({ ...r, d20_2: rollDice(20, 2) }));
+        } else if (type === '1d20') {
+          setDiceResults(r => ({ ...r, d20_1: rollDice(20, 1) }));
+        } else if (type === 'd6') {
+          setDiceResults(r => ({ ...r, d6: rollDice(6, d6Count) }));
+        }
+      }
+      function changeStat(stat, delta) {
+        setPlayers(players => players.map((p, i) => {
+          if (i !== selectedPlayer) return p;
+          if (stat === 'hp') {
+            return { ...p, hp: Math.max(0, Math.min(p.maxHp, p.hp + delta)) };
+          } else if (stat === 'ap') {
+            return { ...p, ap: Math.max(0, Math.min(p.maxAp, p.ap + delta)) };
+          } else if (stat === 'rad') {
+            return { ...p, rad: Math.max(0, p.rad + delta) };
+          }
+          return p;
+        }));
+      }
+      const player = players[selectedPlayer];
+      // List of available maps (PNG only, corrected names)
+      const mapList = [
+        'alaska.png','arizona.png','arkansas.png','california.png','colorado.png','connecticut.png','delaware.png','florida.png','georgia.png','hawaii.png','idaho.png','illinois.png','indiana.png','iowa.png','kansas.png','kentucky.png','louisiana.png','maine.png','maryland.png','massachusetts.png','michigan.png','minnesota.png','mississippi.png','missouri.png','montana.png','nebraska.png','nevada.png','new_hampshire.png','new_jersey.png','new_mexico.png','new_york.png','north_carolina.png','north_dakota.png','ohio.png','oklahama.png','oregon.png','pennsylvania.png','rhode_island.png','south_carolina.png','south_dakota.png','tennessee.png','texas.png','utah.png','vermont.png','virginia.png','washington.png','west_virginia.png','wisconsin.png','wyoming.png'
+      ];
+      const [selectedMap, setSelectedMap] = React.useState(mapList[0]);
+      let radioTabContent = null;
+      if (activeTab === 'Stats') {
+        radioTabContent = (
+          <div className="gmui-grid fallout-main-content">
+            {/* Column 1: Avatar, player name, weather dropdown, equipped */}
+            <div className="gmui-col" style={{ alignItems: 'center', justifyContent: 'flex-start' }}>
+              <div style={{ margin: '12px 0 18px 0', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {/* Avatar circle */}
+                <div style={{ width: 64, height: 64, borderRadius: '50%', border: '3px solid #39ff14', marginBottom: 12 }}></div>
+                {/* Player name box */}
+                <div className="fallout-section-header" style={{ width: '80%', border: '2px solid #39ff14', borderRadius: 8, padding: '8px 0', textAlign: 'center', marginBottom: 12, color: '#39ff14' }}>
+                  {player.name}
+                </div>
+                {/* Weather dropdown box */}
+                <div style={{ width: '80%', border: '2px solid #39ff14', borderRadius: 8, padding: '8px 0', textAlign: 'center', marginBottom: 12 }}>
+                  <select
+                    style={{
+                      width: '90%',
+                      background: '#050d07',
+                      color: '#39ff14',
+                      border: '2px solid #39ff14',
+                      borderRadius: 6,
+                      fontFamily: 'Share Tech Mono',
+                      fontSize: '1em',
+                      textAlign: 'center',
+                      padding: '6px',
+                      margin: '0 auto',
+                      display: 'block'
+                    }}
+                    value={player.weather || ''}
+                    onChange={e => setPlayers(players => players.map((p, i) => i === selectedPlayer ? { ...p, weather: e.target.value } : p))}
+                  >
+                    <option value="">Select Weather</option>
+                    <option value="atomic Heat Wave">atomic Heat Wave</option>
+                    <option value="nuclear winter">nuclear winter</option>
+                    <option value="indoor">indoor</option>
+                    <option value="rad-cloud">rad-cloud</option>
+                    <option value="rad-rain">rad-rain</option>
+                    <option value="rad-fog">rad-fog</option>
+                    <option value="fallout storm">fallout storm</option>
+                    <option value="rad-snow">rad-snow</option>
+                    <option value="in water">in water</option>
+                    <option value="glowing blizzard">glowing blizzard</option>
+                    <option value="clear/background">clear/background</option>
+                  </select>
+                </div>
+                {/* Equipped box */}
+                <div style={{ width: '80%', height: '90px', border: '2px solid #39ff14', borderRadius: 8, padding: '8px', textAlign: 'center', marginBottom: 12, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', fontSize: '1em', overflow: 'hidden' }}>
+                  <span className="fallout-section-header" style={{ color: '#39ff14', fontWeight: 'bold', marginBottom: '4px' }}>Equipped:</span>
+                  <ul className="fallout-list" style={{ margin: 0, padding: 0, listStyleType: 'none' }}>
+                    {player.equipment && player.equipment.map((item, idx) => (
+                      <li key={idx} style={{ color: '#39ff14', textAlign: 'center' }}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            {/* Column 2: Player Stats */}
+            <div className="gmui-col">
+              <div className="gmui-col-title">STATS</div>
+              <div className="fallout-section-header">Level: {player.level} | XP: {player.xp}</div>
+              <div className="fallout-section-header">HP/RAD {Math.max(0, Math.min(player.hp, player.maxHp - player.rad))}/{player.maxHp - player.rad} | <span style={{ color: '#ff4444' }}>RAD:{player.rad}</span></div>
+              <div style={{ margin: '8px 0' }}>
+                <div style={{ background: '#222', borderRadius: 6, height: 18, width: '100%', position: 'relative', overflow: 'hidden' }}>
+                  {/* Green HP bar: only up to (maxHp - rad) */}
+                  <div style={{
+                    background: '#39ff14',
+                    width: `${(Math.max(0, Math.min(player.hp, player.maxHp - player.rad)) / player.maxHp) * 100}%`,
+                    height: '100%',
+                    borderRadius: 6,
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    transition: 'width 0.4s',
+                    zIndex: 1
+                  }}></div>
+                  {/* Missing HP bar: between green and red, dark gray */}
+                  <div style={{
+                    background: '#111',
+                    width: `${((Math.max(0, player.maxHp - player.rad) - Math.max(0, Math.min(player.hp, player.maxHp - player.rad))) / player.maxHp) * 100}%`,
+                    height: '100%',
+                    position: 'absolute',
+                    left: `${(Math.max(0, Math.min(player.hp, player.maxHp - player.rad)) / player.maxHp) * 100}%`,
+                    top: 0,
+                    transition: 'width 0.4s, left 0.4s',
+                    zIndex: 2
+                  }}></div>
+                  {/* Red RAD overlay: overlays the rightmost portion, width = (rad / maxHp) * 100% */}
+                  <div style={{
+                    background: '#ff4444',
+                    width: `${(Math.min(player.rad, player.maxHp) / player.maxHp) * 100}%`,
+                    height: '100%',
+                    borderRadius: 6,
+                    position: 'absolute',
+                    right: 0,
+                    top: 0,
+                    opacity: 0.85,
+                    transition: 'width 0.4s',
+                    zIndex: 3
+                  }}></div>
+                </div>
+              </div>
+              <div style={{ marginBottom: 8 }}>AP <b>{player.ap}/{player.maxAp}</b></div>
+              <div style={{ display: 'flex', gap: 2, marginBottom: 8 }}>
+                {[...Array(20)].map((_, i) => (
+                  <div key={i} style={{ width: 10, height: 14, background: i < Math.round((player.ap/player.maxAp)*20) ? '#ffe066' : '#222', borderRadius: 2 }}></div>
+                ))}
+              </div>
+              <div className="gmui-btn-grid">
+                <button className="main-menu-btn" onClick={() => changeStat('hp', -1)}>-HP</button>
+                <button className="main-menu-btn" onClick={() => changeStat('hp', 1)}>+HP</button>
+                <button className="main-menu-btn" onClick={() => changeStat('ap', -1)}>-AP</button>
+                <button className="main-menu-btn" onClick={() => changeStat('ap', 1)}>+AP</button>
+                <button className="main-menu-btn" onClick={() => changeStat('rad', -1)}>-RAD</button>
+                <button className="main-menu-btn" onClick={() => changeStat('rad', 1)}>+RAD</button>
+              </div>
+              <div style={{ fontWeight: 'bold', color: '#39ff14', marginBottom: 4 }}>SKILLS</div>
+              <div className="fallout-section-header" style={{ marginBottom: 4 }}>SKILLS</div>
+              <div className="gmui-skills-grid fallout-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, width: '100%' }}>
+                {Object.entries(player.skills).map(([skill, val]) => (
+                  <div key={skill}>{skill}: {val}</div>
+                ))}
+              </div>
+            </div>
+            {/* Column 3: Players List */}
+            <div className="gmui-col">
+              <div className="gmui-col-title">PLAYERS</div>
+              {players.map((p, i) => (
+                <div key={i} onClick={() => setSelectedPlayer(i)} className={"gmui-player-card" + (i === selectedPlayer ? " selected" : "") }>
+                  <div style={{ fontWeight: 'bold', color: i === selectedPlayer ? '#ffe066' : '#39ff14' }}>{p.name}</div>
+                  <div>{p.role}</div>
+                  <div>HP:{p.hp}/{p.maxHp} AP:{p.ap}/{p.maxAp} RAD:{p.rad}</div>
+                  {i === selectedPlayer && (
+                    <div style={{ marginTop: 6, borderTop: '1px solid #39ff14', paddingTop: 6 }}>
+                      <div style={{ fontWeight: 'bold', color: '#39ff14' }}>PERKS:</div>
+                      {p.perks.length > 0 ? (
+                        <ul style={{ margin: 0, paddingLeft: 18 }}>
+                          {p.perks.map((perk, idx) => (
+                            <li key={idx} dangerouslySetInnerHTML={{ __html: perk }} />
+                          ))}
+                        </ul>
+                      ) : <div style={{ opacity: 0.7 }}>None</div>}
+                      <div style={{ fontWeight: 'bold', color: '#39ff14', marginTop: 4 }}>TRAITS:</div>
+                      {p.traits.length > 0 ? (
+                        <ul style={{ margin: 0, paddingLeft: 18 }}>
+                          {p.traits.map((trait, idx) => (
+                            <li key={idx} dangerouslySetInnerHTML={{ __html: trait }} />
+                          ))}
+                        </ul>
+                      ) : <div style={{ opacity: 0.7 }}>None</div>}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            {/* Column 4: Dice Roller */}
+            <div className="gmui-col">
+              <div className="gmui-col-title" style={{ textAlign: 'center' }}>Dice Roller</div>
+              <div className="gmui-dice-btn-row" style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginBottom: '16px' }}>
+                <button className="main-menu-btn" onClick={() => handleRoll('2d20')}>2d20</button>
+                <button className="main-menu-btn" onClick={() => handleRoll('1d20')}>1d20</button>
+                <button className="main-menu-btn" onClick={() => handleRoll('d6')}>6d6</button>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ border: '2px solid #39ff14', borderRadius: 6, padding: '10px', textAlign: 'center', fontFamily: 'Share Tech Mono', fontSize: '1.1em', background: '#050d07' }}>
+                  2d20: <span style={{ color: '#39ff14' }}>{diceResults.d20_2 ?? '-'}</span>
+                </div>
+                <div style={{ border: '2px solid #39ff14', borderRadius: 6, padding: '10px', textAlign: 'center', fontFamily: 'Share Tech Mono', fontSize: '1.1em', background: '#050d07' }}>
+                  1d20: <span style={{ color: '#39ff14' }}>{diceResults.d20_1 ?? '-'}</span>
+                </div>
+                <div style={{ border: '2px solid #39ff14', borderRadius: 6, padding: '10px', background: '#050d07', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontFamily: 'Share Tech Mono', fontSize: '1.1em' }}>
+                  <span style={{ flex: 2, textAlign: 'center' }}>
+                    6d6: <span style={{ color: '#39ff14' }}>{diceResults.d6 ?? '-'}</span>
+                  </span>
+                  <input type="number" min="1" max="99" value={d6Count} onChange={e => setD6Count(Math.max(1, Math.min(99, Number(e.target.value))))} style={{ width: 48, background: '#050d07', color: '#39ff14', border: '2px solid #39ff14', borderRadius: 6, fontFamily: 'Share Tech Mono', fontSize: '1em', textAlign: 'center', marginLeft: '8px' }} />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      } else if (activeTab === 'Inventory') {
+        // Placeholder inventory data for demonstration
+        const inventory = player.inventory || {
+          Weapons: [
+            { name: '10mm Pistol', ammo: 24 },
+            { name: 'Hunting Rifle', ammo: 5 }
+          ],
+          "Apparel/Armor": [
+            { name: 'Leather Armor' },
+            { name: 'Vault Suit' }
+          ],
+          Aid: [
+            { name: 'Stimpak', qty: 3 },
+            { name: 'RadAway', qty: 1 }
+          ],
+          Junk: [
+            { name: 'Wonderglue' },
+            { name: 'Empty Bottle' }
+          ],
+          Misc: [
+            { name: 'Vault 101 Key' },
+            { name: 'Holotape: Overseer Log' },
+            { name: 'Note: Meet at Bridge' },
+            { name: 'Quest Item: Water Chip' }
+          ]
+        };
+        const subtabList = ['Weapons', 'Apparel/Armor', 'Aid', 'Junk', 'Misc'];
+        radioTabContent = (
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24 }}>
+            <div style={{ display: 'flex', gap: 12, marginBottom: 18 }}>
+              {subtabList.map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setInvSubtab(tab)}
+                  style={{
+                    background: invSubtab === tab ? '#0a1a0a' : 'none',
+                    color: '#39ff14',
+                    border: '2px solid #39ff14',
+                    borderRadius: 6,
+                    padding: '6px 18px',
+                    fontWeight: invSubtab === tab ? 'bold' : 'normal',
+                    fontFamily: 'Share Tech Mono, monospace',
+                    fontSize: '18px',
+                    boxShadow: invSubtab === tab ? '0 0 8px #39ff14' : 'none',
+                    cursor: 'pointer',
+                    transition: 'background 0.2s, box-shadow 0.2s'
+                  }}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+            <div className="fallout-main-content" style={{ width: '90%', minHeight: 180, border: '2px solid #39ff14', borderRadius: 8, background: '#050d07', padding: 16 }}>
+              {invSubtab === 'Weapons' && (
+                <div>
+                  <div className="fallout-section-header" style={{ marginBottom: 8 }}>Weapons</div>
+                  <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18 }}>
+                    {inventory.Weapons.map((w, i) => (
+                      <li key={i}>{w.name} <span style={{ color: '#ffe066' }}>[Ammo: {w.ammo}]</span></li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {invSubtab === 'Apparel/Armor' && (
+                <div>
+                  <div className="fallout-section-header" style={{ marginBottom: 8 }}>Apparel / Armor</div>
+                  <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18 }}>
+                    {inventory["Apparel/Armor"].map((a, i) => (
+                      <li key={i}>{a.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {invSubtab === 'Aid' && (
+                <div>
+                  <div className="fallout-section-header" style={{ marginBottom: 8 }}>Aid</div>
+                  <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18 }}>
+                    {inventory.Aid.map((a, i) => (
+                      <li key={i}>{a.name} {a.qty ? <span style={{ color: '#ffe066' }}>[x{a.qty}]</span> : null}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {invSubtab === 'Junk' && (
+                <div>
+                  <div className="fallout-section-header" style={{ marginBottom: 8 }}>Junk</div>
+                  <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18 }}>
+                    {inventory.Junk.map((j, i) => (
+                      <li key={i}>{j.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {invSubtab === 'Misc' && (
+                <div>
+                  <div className="fallout-section-header" style={{ marginBottom: 8 }}>Misc (Keys, Holotapes, Notes, Quest Items)</div>
+                  <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18 }}>
+                    {inventory.Misc.map((m, i) => (
+                      <li key={i}>{m.name}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      } else if (activeTab === 'Special') {
+        // SPECIAL, Skills, Perks, Traits tab
+        const specialStats = player.special || {
+          Strength: 5,
+          Perception: 5,
+          Endurance: 5,
+          Charisma: 5,
+          Intelligence: 5,
+          Agility: 5,
+          Luck: 5
+        };
+        radioTabContent = (
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24 }}>
+            <div style={{ color: '#39ff14', fontFamily: 'Orbitron, Share Tech Mono, monospace', fontSize: '25px', fontWeight: 'bold', marginBottom: 24, textShadow: '0 0 8px #39ff14', border: '3px solid #39ff14', borderRadius: 6, padding: '4px 32px', background: '#050d07', letterSpacing: 2, display: 'inline-block' }}>
+              SPECIAL
+            </div>
+            <div style={{ display: 'flex', gap: 24, width: '96%', justifyContent: 'center', flexWrap: 'wrap' }}>
+              {/* Primary Stats */}
+              <div className="fallout-main-content" style={{ minWidth: 240, flex: 1, border: '3px solid #39ff14', borderRadius: 8, background: '#050d07', marginBottom: 12, padding: 8, maxWidth: 320 }}>
+                <div className="fallout-section-header" style={{ color: '#39ff14', marginBottom: 8, border: '2px solid #39ff14', borderRadius: 4, background: '#0a1a0a', padding: '2px 12px', display: 'inline-block' }}>Primary Stats</div>
+                <table className="fallout-table" style={{ width: '100%', color: '#39ff14', borderCollapse: 'collapse', marginTop: 8 }}>
+                  <tbody>
+                    {Object.entries(specialStats).map(([stat, val]) => (
+                      <tr key={stat}>
+                        <td style={{ padding: '4px 8px', fontWeight: 'bold' }}>{stat}</td>
+                        <td style={{ padding: '4px 8px', textAlign: 'right', fontWeight: 'bold' }}>{val}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {/* Skills */}
+              <div className="fallout-main-content" style={{ minWidth: 200, flex: 1, border: '3px solid #39ff14', borderRadius: 8, background: '#050d07', marginBottom: 12, padding: 8, maxWidth: 260 }}>
+                <div className="fallout-section-header" style={{ color: '#39ff14', marginBottom: 8, border: '2px solid #39ff14', borderRadius: 4, background: '#0a1a0a', padding: '2px 12px', display: 'inline-block' }}>Skills</div>
+                <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18, marginTop: 8 }}>
+                  {Object.entries(player.skills || {}).map(([skill, val]) => (
+                    <li key={skill}>{skill}: {val}</li>
+                  ))}
+                </ul>
+              </div>
+              {/* Perks */}
+              <div className="fallout-main-content" style={{ minWidth: 200, flex: 1, border: '3px solid #39ff14', borderRadius: 8, background: '#050d07', marginBottom: 12, padding: 8, maxWidth: 260 }}>
+                <div className="fallout-section-header" style={{ color: '#39ff14', marginBottom: 8, border: '2px solid #39ff14', borderRadius: 4, background: '#0a1a0a', padding: '2px 12px', display: 'inline-block' }}>Perks</div>
+                <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18, marginTop: 8 }}>
+                  {(player.perks || []).map((perk, idx) => (
+                    <li key={idx} dangerouslySetInnerHTML={{ __html: perk }} />
+                  ))}
+                </ul>
+              </div>
+              {/* Traits */}
+              <div className="fallout-main-content" style={{ minWidth: 200, flex: 1, border: '3px solid #39ff14', borderRadius: 8, background: '#050d07', marginBottom: 12, padding: 8, maxWidth: 260 }}>
+                <div className="fallout-section-header" style={{ color: '#39ff14', marginBottom: 8, border: '2px solid #39ff14', borderRadius: 4, background: '#0a1a0a', padding: '2px 12px', display: 'inline-block' }}>Traits</div>
+                <ul className="fallout-list" style={{ margin: 0, paddingLeft: 18, marginTop: 8 }}>
+                  {(player.traits || []).map((trait, idx) => (
+                    <li key={idx} dangerouslySetInnerHTML={{ __html: trait }} />
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        );
+      } else if (activeTab === 'Radio') {
+        radioTabContent = (
+          <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24 }}>
+            <div style={{ color: '#39ff14', fontFamily: 'Orbitron, Share Tech Mono, monospace', fontSize: '1.5em', marginBottom: 16, textShadow: '0 0 8px #39ff14' }}>
+              Fallout Radio
+            </div>
+            <iframe
+              src="https://open.spotify.com/embed/playlist/5RI1Q9tVzZkQInxpYmrARl"
+              width="80%"
+              height="380"
+              frameBorder="0"
+              allowtransparency="true"
+              allow="encrypted-media"
+              style={{ borderRadius: '12px', boxShadow: '0 0 16px #39ff14', background: '#111', border: '2px solid #39ff14', minWidth: 320, maxWidth: 600 }}
+              title="Fallout Radio Playlist"
+            ></iframe>
+          </div>
+        );
+      } else if (activeTab === 'Map') {
+        radioTabContent = (
+          <div className="fallout-main-content" style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 24, minHeight: 340, gap: 48 }}>
+            {/* Left half: Lore box */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div className="fallout-section-header" style={{ marginBottom: 12, border: '3px solid #39ff14', borderRadius: 4, background: 'transparent', padding: '4px 18px', display: 'inline-block', color: '#39ff14', fontWeight: 'bold', textAlign: 'center' }}>lore</div>
+              <div style={{ border: '4px solid #39ff14', borderRadius: 6, width: 400, height: 300, background: 'rgba(0,0,0,0.15)', marginTop: 0 }}></div>
+            </div>
+            {/* Right half: Map select and display */}
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ marginBottom: 12, width: 320, textAlign: 'center' }}>
+                <select
+                  value={selectedMap}
+                  onChange={e => setSelectedMap(e.target.value)}
+                  className="fallout-section-header"
+                  style={{
+                    width: '100%',
+                    border: '3px solid #39ff14',
+                    borderRadius: 6,
+                    background: '#050d07',
+                    color: '#39ff14',
+                    padding: '6px 18px',
+                    marginBottom: 8,
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    fontSize: '1.2em'
+                  }}
+                >
+                  {mapList.map(map => (
+                    <option key={map} value={map}>{map.replace('.png','').replace(/_/g,' ')}</option>
+                  ))}
+                </select>
+              </div>
+              <div style={{ border: '4px solid #39ff14', borderRadius: 6, width: 400, height: 300, overflow: 'hidden', position: 'relative', background: '#111' }}>
+                <img
+                  src={`fallout_os_maps/${selectedMap}`}
+                  alt={selectedMap}
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: '50%',
+                    width: '190%',
+                    height: '190%',
+                    transform: 'translate(-50%, -50%)',
+                    objectFit: 'contain',
+                    filter: 'drop-shadow(0 0 8px #39ff14)',
+                    pointerEvents: 'none',
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      } else if (activeTab === 'Overseer') {
+        radioTabContent = (
+          <div className="fallout-main-content" style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24 }}>
+            {/* Overseer Input Box */}
+            <div style={{
+              width: '96%',
+              minHeight: 100,
+              border: '3px solid #39ff14',
+              borderRadius: 6,
+              marginBottom: 18,
+              background: '#050d07',
+              position: 'relative',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              padding: '18px 18px 18px 18px',
+            }}>
+              <span className="fallout-section-header" style={{ color: '#39ff14', marginBottom: 10 }}>overseer input</span>
+              {/* Right-aligned buttons */}
+              <div style={{ position: 'absolute', top: 18, right: 18, display: 'flex', gap: 10 }}>
+                <button style={{ border: '2px solid #39ff14', color: '#39ff14', background: 'transparent', borderRadius: 4, fontSize: '18px', padding: '4px 16px', fontFamily: 'Share Tech Mono, monospace', cursor: 'pointer', fontWeight: 500 }}>ask overseer</button>
+                <button style={{ border: '2px solid #39ff14', color: '#39ff14', background: 'transparent', borderRadius: 4, fontSize: '15px', padding: '4px 10px', fontFamily: 'Share Tech Mono, monospace', cursor: 'pointer', fontWeight: 500 }}>audio<br /><span style={{ fontSize: '0.8em' }}>on off</span></button>
+              </div>
+            </div>
+            {/* Overseer Output Box */}
+            <div style={{
+              width: '96%',
+              minHeight: 220,
+              border: '3px solid #39ff14',
+              borderRadius: 6,
+              background: '#050d07',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              padding: '18px 18px 18px 18px',
+              marginBottom: 10,
+            }}>
+              <span className="fallout-section-header" style={{ color: '#39ff14' }}>overseer output</span>
+            </div>
+          </div>
+        );
+      }
+      return (
+        <div className="gmui-wrapper">
+          {/* Fallout Health/Rad Bar Demo (remove or connect to player data as needed) */}
+          <div className="gmui-header">
+            <div className="gmui-tabs">
+              {['Stats','Inventory','Special','Radio','Map','Overseer'].map(tab => (
+                <button
+                  key={tab}
+                  className={"gmui-tab" + (activeTab === tab ? " active" : "")}
+                  onClick={() => setActiveTab(tab)}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
+          {radioTabContent}
+          <div className="gmui-mainmenu-btn-wrapper">
+            <button className="main-menu-btn" onClick={onMainMenu}>Main Menu</button>
+          </div>
+        </div>
+      );
+    }
+
+    function PlayerUI({ onBack }) {
+      const [activeTab, setActiveTab] = React.useState('STATS');
+      return (
+        <div className="gm-ui">
+          <div className="tab-bar">
+            {['STATS','INVENTORY','MAP','RADIO'].map(t => (
+              <button
+                key={t}
+                className={'tab-btn' + (activeTab === t ? ' active' : '')}
+                onClick={() => setActiveTab(t)}
+              >
+                {t}
+              </button>
+            ))}
+          </div>
+          {activeTab !== 'RADIO' ? (
+            <div className="gm-panel">
+              <div className="gm-col"></div>
+              <div className="gm-col"></div>
+              <div className="gm-col"></div>
+              <div className="gm-col"></div>
+            </div>
+          ) : (
+            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 24, position: 'relative', height: 'calc(100vh - 120px)' }}>
+              <div style={{ color: '#39ff14', fontFamily: 'Orbitron, Share Tech Mono, monospace', fontSize: '1.5em', marginBottom: 16, textShadow: '0 0 8px #39ff14' }}>
+                Fallout Radio
+              </div>
+              <iframe
+                src="https://open.spotify.com/embed/playlist/5RI1Q9tVzZkQInxpYmrARl"
+                width="80%"
+                height="380"
+                frameBorder="0"
+                allowtransparency="true"
+                allow="encrypted-media"
+                style={{ borderRadius: '12px', boxShadow: '0 0 16px #39ff14', background: '#111', border: '2px solid #39ff14', minWidth: 320, maxWidth: 600 }}
+                title="Fallout Radio Playlist"
+              ></iframe>
+            </div>
+          )}
+          <div className="main-menu-btn-row" style={{ justifyContent: 'center', marginTop: 16 }}>
+            <button className="main-menu-btn" onClick={onBack}>Main Menu</button>
+          </div>
+        </div>
+      );
+    }
+
+    function App() {
+      const [mode, setMode] = useState('MENU');
+      return (
+        <>
+          {mode === 'MENU' && <MainMenu onSelect={setMode} />}
+          {mode === 'GM' && <GMUI onMainMenu={() => setMode('MENU')} />}
+          {mode === 'PLAYER' && <PlayerUI onBack={() => setMode('MENU')} />}
+        </>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>

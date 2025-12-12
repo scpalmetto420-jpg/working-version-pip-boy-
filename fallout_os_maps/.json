@@ -1,0 +1,44 @@
+﻿{
+    "locations":  [
+                      {
+                          "id":  "vault_111",
+                          "name":  "Vault 111",
+                          "description":  "Your starting vault",
+                          "y":  150,
+                          "x":  100,
+                          "rads":  0
+                      },
+                      {
+                          "id":  "diamond_city",
+                          "name":  "Diamond City",
+                          "description":  "Major settlement in the Commons",
+                          "y":  140,
+                          "x":  180,
+                          "rads":  5
+                      },
+                      {
+                          "id":  "glowing_sea",
+                          "name":  "The Glowing Sea",
+                          "description":  "Highly irradiated zone",
+                          "y":  220,
+                          "x":  80,
+                          "rads":  95
+                      },
+                      {
+                          "id":  "sanctuary",
+                          "name":  "Sanctuary Hills",
+                          "description":  "Your old neighborhood",
+                          "y":  100,
+                          "x":  60,
+                          "rads":  0
+                      },
+                      {
+                          "id":  "boston_airport",
+                          "name":  "Boston Airport",
+                          "description":  "Prydwen landing zone",
+                          "y":  100,
+                          "x":  200,
+                          "rads":  10
+                      }
+                  ]
+}

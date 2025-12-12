@@ -1,0 +1,254 @@
+﻿{
+    "maps":  [
+                 {
+                     "name":  "Alabama",
+                     "file":  "alaska.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Alaska",
+                     "file":  "arizona.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Arizona",
+                     "file":  "arkansas.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Arkanas",
+                     "file":  "california.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Calforina",
+                     "file":  "colorado.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Colorado",
+                     "file":  "connecticut.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Connecticut",
+                     "file":  "delaware.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Delaware",
+                     "file":  "florida.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Florida",
+                     "file":  "georgia.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Georga",
+                     "file":  "hawaii.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Hawaii",
+                     "file":  "idaho.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Idaho",
+                     "file":  "illinois.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Illinois",
+                     "file":  "indiana.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Indiana",
+                     "file":  "iowa.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Iowa",
+                     "file":  "kansas.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Kansas",
+                     "file":  "kentucky.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Kentucky",
+                     "file":  "louisiana.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Louisiana",
+                     "file":  "maine.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Maine",
+                     "file":  "maryland.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Maryland",
+                     "file":  "massachusetts.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Massachusetts",
+                     "file":  "michigan.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Michigan",
+                     "file":  "minnesota.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Minnsota",
+                     "file":  "mississippi.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Mississippi",
+                     "file":  "missouri.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Missouri",
+                     "file":  "montana.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Montana",
+                     "file":  "nebraska.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Nebraska",
+                     "file":  "nevada.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Nevada",
+                     "file":  "new_hampshire.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "New Hampshire",
+                     "file":  "new_jersey.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "New Jersy",
+                     "file":  "new_mexico.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "New Mexico",
+                     "file":  "new_york.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "New York",
+                     "file":  "north_carolina.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "North Carolina",
+                     "file":  "north_dakota.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "North Dakota",
+                     "file":  "ohio.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Ohio",
+                     "file":  "oklahama.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Oklahama",
+                     "file":  "oregon.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Oregon",
+                     "file":  "pennsylvania.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Pennsylvania",
+                     "file":  "rhode_island.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Rhode Island",
+                     "file":  "south_carolina.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "South Carolina",
+                     "file":  "south_dakota.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "South Dakota",
+                     "file":  "tennessee.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Tennssee",
+                     "file":  "texas.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Texas",
+                     "file":  "utah.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Utah",
+                     "file":  "vermont.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Vermont",
+                     "file":  "virginia.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Virgina",
+                     "file":  "washington.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Washington",
+                     "file":  "west_virginia.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "West Virgina",
+                     "file":  "wisconsin.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Wisconsin",
+                     "file":  "wyoming.png",
+                     "type":  "image"
+                 },
+                 {
+                     "name":  "Wyoming",
+                     "file":  "wyoming.png",
+                     "type":  "image"
+                 }
+             ]
+}

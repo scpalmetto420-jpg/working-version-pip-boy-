@@ -1,0 +1,79 @@
+﻿{
+    "features":  [
+                     {
+                         "properties":  {
+                                            "name":  "Vault 111",
+                                            "type":  "vault"
+                                        },
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "coordinates":  [
+                                                              -71.0589,
+                                                              42.3601
+                                                          ],
+                                          "type":  "Point"
+                                      }
+                     },
+                     {
+                         "properties":  {
+                                            "name":  "Diamond City",
+                                            "type":  "settlement"
+                                        },
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "coordinates":  [
+                                                              -71.0096,
+                                                              42.3585
+                                                          ],
+                                          "type":  "Point"
+                                      }
+                     },
+                     {
+                         "properties":  {
+                                            "name":  "The Glowing Sea",
+                                            "type":  "radiation_zone"
+                                        },
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "coordinates":  [
+                                                              [
+                                                                  -71.1,
+                                                                  42.25
+                                                              ],
+                                                              [
+                                                                  -71,
+                                                                  42.25
+                                                              ],
+                                                              [
+                                                                  -71,
+                                                                  42.35
+                                                              ],
+                                                              [
+                                                                  -71.1,
+                                                                  42.35
+                                                              ],
+                                                              [
+                                                                  -71.1,
+                                                                  42.25
+                                                              ]
+                                                          ],
+                                          "type":  "Polygon"
+                                      }
+                     },
+                     {
+                         "properties":  {
+                                            "name":  "Sanctuary Hills",
+                                            "type":  "settlement"
+                                        },
+                         "type":  "Feature",
+                         "geometry":  {
+                                          "coordinates":  [
+                                                              -71.15,
+                                                              42.38
+                                                          ],
+                                          "type":  "Point"
+                                      }
+                     }
+                 ],
+    "type":  "FeatureCollection"
+}

@@ -1,0 +1,43 @@
+﻿<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .map-bg { fill: #1a1a1a; }
+      .location { fill: #8bff7f; }
+      .location-label { font-size: 12px; fill: #8bff7f; font-family: monospace; }
+      .radiation { fill: #ff4444; opacity: 0.3; }
+    </style>
+  </defs>
+  
+  <rect class="map-bg" width="400" height="300"/>
+  
+  <!-- Glowing Sea -->
+  <circle class="radiation" cx="100" cy="220" r="60"/>
+  <text class="location-label" x="85" y="225">Glowing Sea</text>
+  
+  <!-- Vault 111 -->
+  <circle class="location" cx="100" cy="150" r="8"/>
+  <text class="location-label" x="110" y="155">Vault 111</text>
+  
+  <!-- Sanctuary Hills -->
+  <circle class="location" cx="60" cy="100" r="8"/>
+  <text class="location-label" x="70" y="105">Sanctuary</text>
+  
+  <!-- Diamond City -->
+  <circle class="location" cx="180" cy="140" r="8"/>
+  <text class="location-label" x="190" y="145">Diamond City</text>
+  
+  <!-- Boston Airport -->
+  <circle class="location" cx="200" cy="100" r="8"/>
+  <text class="location-label" x="210" y="105">Airport</text>
+  
+  <!-- Grid overlay -->
+  <g stroke="#2f8f4a" stroke-width="1" opacity="0.2">
+    <line x1="0" y1="50" x2="400" y2="50"/>
+    <line x1="0" y1="100" x2="400" y2="100"/>
+    <line x1="0" y1="150" x2="400" y2="150"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+    <line x1="100" y1="0" x2="100" y2="300"/>
+    <line x1="200" y1="0" x2="200" y2="300"/>
+    <line x1="300" y1="0" x2="300" y2="300"/>
+  </g>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "maps": [
+    {
+      "name": "Fallout World Map",
+      "file": "fallout_map.svg",
+      "type": "vector"
+    },
+    {
+      "name": "Commonwealth",
+      "file": "fallout_world.geojson",
+      "type": "geojson"
+    },
+    {
+      "name": "Locations",
+      "file": "locations.json",
+      "type": "data"
+    }
+  ]
+}-
