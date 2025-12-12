@@ -1,63 +1,3 @@
-// Fallout state lore and vaults data for Map tab
-const stateLoreData = {
-  alaska: {
-    name: 'Alaska',
-    lore: [
-      'A key front line in the Great War against China, especially the Anchorage Campaign (Operation Anchorage DLC, Fallout 3).',
-      'Presumed to be one of the most ravaged regions due to war, nuclear strikes, and nuclear winters.',
-      'Key locations: Anchorage, Chinese Front.'
-    ],
-    vaults: []
-  },
-  arizona: {
-    name: 'Arizona',
-    lore: [
-      'Largely controlled by Caesar\'s Legion after the war.',
-      'The Legion\'s rise helped decrease violence and Raider activity.',
-      'Key locations: Arizona Spillway.'
-    ],
-    vaults: []
-  },
-  california: {
-    name: 'California',
-    lore: [
-      'Cornerstone of classic Fallout lore and setting for Fallout 1 & 2.',
-      'Birthplace of the New California Republic (NCR), original Brotherhood of Steel, and The Master\'s Army.',
-      'Los Angeles (The Boneyard) was a primary nuclear target.',
-      'Key locations: NCR, Brotherhood of Steel, The Boneyard (L.A.), Shady Sands.'
-    ],
-    vaults: [] // Add vaults if desired
-  },
-  colorado: {
-    name: 'Colorado',
-    lore: [
-      'Largely controlled by Caesar\'s Legion after the war.',
-      'Legate Lanius "put Colorado to the sword".',
-      'Key locations: None specified.'
-    ],
-    vaults: []
-  },
-  connecticut: {
-    name: 'Connecticut',
-    lore: [
-      'Very little is known. References mostly come from transient characters who left shortly after the Great War.'
-    ],
-    vaults: []
-  },
-  // ...repeat for all other states, using the provided lore and vaults, or fallback below...
-};
-
-// Fallback for states with no lore
-const fallbackStateLore = {
-  name: '',
-  lore: [
-    'WARNING:',
-    "robco is not responsible for you're death don't go forward from here.",
-    'DATA:',
-    'This region has been historically isolated. Reports are anecdotal, incomplete, or corrupted. Do not rely on pre-War data.'
-  ],
-  vaults: []
-};
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,6 +5,9 @@ const fallbackStateLore = {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fallout GM/Player UI - Main Menu Only</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Share+Tech+Mono|Orbitron:700" />
+  <script>
+  // (Commented-out lore data moved to the end of the file)
+  </script>
   <style>
       /* SPECIAL tab font style for all main content areas */
       .fallout-main-content, .fallout-section-header, .fallout-list, .fallout-table {
@@ -987,12 +930,31 @@ const fallbackStateLore = {
           </div>
         );
       } else if (activeTab === 'Map') {
+        const [loreText, setLoreText] = React.useState("");
         radioTabContent = (
           <div className="fallout-main-content" style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 24, minHeight: 340, gap: 48 }}>
-            {/* Left half: Lore box */}
+            {/* Left half: Lore box (editable text area) */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
               <div className="fallout-section-header" style={{ marginBottom: 12, border: '3px solid #39ff14', borderRadius: 4, background: 'transparent', padding: '4px 18px', display: 'inline-block', color: '#39ff14', fontWeight: 'bold', textAlign: 'center' }}>lore</div>
-              <div style={{ border: '4px solid #39ff14', borderRadius: 6, width: 400, height: 300, background: 'rgba(0,0,0,0.15)', marginTop: 0 }}></div>
+              <textarea
+                value={loreText}
+                onChange={e => setLoreText(e.target.value)}
+                placeholder="Type or paste lore here..."
+                style={{
+                  border: '4px solid #39ff14',
+                  borderRadius: 6,
+                  width: 400,
+                  height: 300,
+                  background: 'rgba(0,0,0,0.15)',
+                  color: '#39ff14',
+                  fontFamily: 'Share Tech Mono, monospace',
+                  fontSize: 16,
+                  padding: 12,
+                  resize: 'none',
+                  outline: 'none',
+                  marginTop: 0
+                }}
+              />
             </div>
             {/* Right half: Map select and display */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
