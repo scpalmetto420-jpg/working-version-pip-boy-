@@ -1,0 +1,88 @@
+Special Encounter: The Wandering Chronicler
+Location Trigger: Random encounter in desolate ruins or a remote, low-traffic settlement.
+Visual & Sound: The party hears the loud, grinding hiss of ancient hydraulics, followed by a metallic thud. A figure approaches, massive in T-45d Power Armor, scarred with Western Brotherhood insignia. They carry a backpack overflowing with holotapes and a salvaged recording rig. An old, patched Eyebot (ED-NA) floats nearby, its single eye occasionally flashing a recording light. This is the Storyteller.
+Dialogue Hook (The Storyteller):
+"Hold, travelers. I've tracked this ruin for days, seeking a lost truth. Tell me, friend, how do you wish to be remembered? Will your name be a whisper in the dust, or a song recorded for the ages?"
+Player Options:
+[SPEECH: PERSUASION] Attempt to gain his trust by sharing a significant (and verifiable) piece of local history (DC 15).
+[PERCEPTION] Check the armor’s unique markings and the recording equipment (DC 12).
+[BARTER] Ask about trading for supplies or specialized knowledge.
+Resolution: Success on the Speech check earns the party a Lore Reward (detailed background on the region or a legendary NPC). Success on the Perception check reveals he is a self-designated Scribe, not official Brotherhood. He always trades rare pre-War texts for repair components.     
+
+
+
+  
+The G.E.C.K.
+The Garden of Eden Creation Kit (G.E.C.K.) is a crucial, high-tech device distributed to specific Vault-Tec Vaults before the Great War. Its sole purpose is terraforming—to rapidly revitalize the surface environment after a nuclear exchange, turning barren Wasteland into a habitable, fertile zone.
+Encased in a distinctive briefcase, the kit contains a myriad of seeds, fertilizers, high-yield tools, and sometimes a small, contained mini-fusion reactor. Its successful activation can transform a massive radius, spurring clean water sources and lush vegetation. The quest to secure a working G.E.C.K. is central to the plots of both Fallout 2 and Fallout 3, highlighting its immense value for rebuilding civilization.
+
+
+
+
+☢️ Comprehensive List of Fallout Enemy Types (Up to 2291)
+I. Mutated Humans & Cryptids
+Feral Ghoul: (Includes Roamers, Stalkers, Reavers, Charred, Putrid, Glowing Ones, Bloated Glowing Ones)
+Super Mutant: (Includes Skirmishers, Brutes, Masters, Overlords, Behemoths, Nightkin, Suiciders, Hounds)
+The Scorched: (Humanoid enemies infected by the Scorched Plague)
+Mole Miner: (Mutated, degenerate humans found in mines)
+Raider / Scavenger / Mercenary: (Hostile armed humans, including specific gangs like Powder Gangers, Jackals, Fiends)
+Slaver / Legionary: (Enemies specific to the Enclave and Caesar's Legion)
+Children of Atom / Zealot
+Cryptids:
+Flatwoods Monster
+Grafton Monster
+Mothman (Hostile and passive variants)
+Snallygaster
+Sheepsquatch
+Wendigo (Includes Wendigo Colossus)
+II. Mutated Mammals
+Deathclaw: (Includes Albino, Blind, Savage, Legendary, Hairy, Mother, Young)
+Yao Guai: (Mutated bears, includes Shaggy, Glowing)
+Radstag: (Mutated deer, includes Stags, Does, Albino, Glowing, Two-Headed)
+Mole Rat: (Includes Brood Mothers, Glowing, Rabid, Suiciders)
+Radroach
+Radscorpion: (Includes Giant, Albino, Glowing, Spitting)
+Mongrel / Wild Dog / Wolf
+Brahmin / Brahmiluff: (Hostile variants)
+Bighorner
+Giant Rat
+Mega Sloth
+Honey Beast
+Opossum
+Radhog
+III. Arthropods, Amphibians, & Sea Creatures
+Mirelurk: (Includes Spawn, Hatchling, Razorclaw, Killclaw, King, Queen, Hunter, Deep King, Nukalurk, Softshell)
+Bloatfly
+Bloodbug
+Stingwing
+Rad Ant: (Includes Soldier, Worker, Forager, Queen, Glowing, Flying Swarm, Giant)
+Mantis
+Tick
+Cave Cricket
+Hermit Crab
+Angler (Mutated fish-like creature)
+Gulper (Mutated salamander-like creature)
+Fog Crawler
+Giant Leech
+Radtoad
+Bee Swarm
+Dolphish
+IV. Synthetics & Robots
+Protectron
+Mister Handy / Mister Gutsy / Miss Nanny
+Eyebot
+Assaultron
+Sentry Bot
+Robobrain
+Synth: (Includes Troopers, Striders, Coursers)
+Liberator (Small Chinese infiltration bots)
+Cargobot / Vertibot (Armed variants)
+Machine Gun / Laser Turrets
+V. Other & Unique
+Alien / Zetan: (Extraterrestrial beings)
+Centaur (FEV experiment from classic Fallout)
+Floater (FEV experiment from classic Fallout)
+Strangler Heart (Foliage-based organism)
+Yao Guai / Deathclaw Abominations (Specific FEV mutants from Fallout Tactics and Brotherhood of Steel)
+Scorchbeast / Scorchbeast Queen (Unique FEV/radiation mutants in Appalachia)
+Ultracite Titan / Ultracite Terror
